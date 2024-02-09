@@ -1,0 +1,138 @@
+
+body {
+    text-align: center;
+    background-image: url(images/pono-lopez-qwoW4mdqjWw-unsplash.jpg);
+    background-size: cover;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+#container {
+    display: flex;
+}
+
+#left-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 75%;
+    padding: 0 20px; /* Adding some padding */
+}
+
+#right-column {
+    width: 25%;
+    padding: 0 20px; /* Adding some padding */
+}
+
+#button {
+    padding: 10px 20px;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    background-color: #FFC300;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+h2 {
+    color: white;
+}
+
+h4 {
+    margin-bottom: 30px;
+}
+
+.people {
+    display: flex;
+    background: white;
+    padding: 20px;
+    margin-bottom: 10px;
+    max-width: 700px;
+}
+
+.people ul {
+    list-style: none;
+    font-size: 15px;
+}
+
+img {
+    object-fit: cover;
+}
+
+div {
+    text-align: left;
+    border-radius: 3px;
+
+    /* max-width: 500px; */
+    /* text-align: left;
+    margin: auto;
+    border-radius: 3px; */
+}
+
+#richest {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center-align the child divs horizontally */
+    align-items: center; /* Center-align the child divs vertically */
+}
+
+/* input {
+    margin-top: 5px;
+    margin-bottom: 20px;
+    width: 100%;
+    height: 28px;
+    padding-left: 10px;
+    font-size: 14px;
+} */
+
+
+#right-column {
+    background-color: rgb(255, 255, 0, 25%);
+}
+
+input {
+    margin-top: 5px;
+    margin-bottom: 20px;
+    width: 100%;
+    height: 28px;
+    padding-left: 10px;
+    padding-right: 20px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+
+label {
+    font-size: 14px;
+}
+
+button {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    padding-left: 15px;
+    padding-right: 15px;
+    border-radius: 50px;
+    border: none;
+    background-color: #FFC300;
+}
+
+button:hover {
+    color: white;
+    background-color: #f1aa04;
+}
+
+blockquote {
+    background-color: rgb(86, 207, 255, 0.5);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+    font-size: 20px;
+    border-top-left-radius: 50px;
+    border-bottom-right-radius: 50px;
+    margin: auto;
+}
+
+blockquote p {
+    font-size: 16px;
+    font-style: italic;
+}

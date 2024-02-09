@@ -1,0 +1,139 @@
+<!-- index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding Challenge v01</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="container">
+        <div id="left-column">
+            <h2>Top Richest People In the World</h2>
+            <div id="peopleList">
+                <!-- People data will be displayed here -->
+            </div>
+        </div>
+        <div id="right-column" style="background-color: white;">
+            <div style="background-color: #f4f4f4; padding-bottom: 20px; padding-left: 20px; padding-right: 20px;">
+                <form action="">
+                    <p style="font-size: 16px; font-weight: 600; padding-top: 20px;">Add new data</p>
+                    <div>
+                        <!-- <input type="text" name="Name"> -->
+                        <label for="name">Name</label><br>
+                            <input type="text" id="name" name="name"><br>
+                        <label for="name">Country</label><br>
+                            <input type="text" id="country" name="country"><br>
+                        <label for="name">Industry</label><br>
+                            <input type="text" id="industry" name="industry"><br>
+                        <label for="name">Source</label><br>
+                            <input type="text" id="source" name="source"><br>
+                        <label for="name">Worth</label><br>
+                            <input type="text" id="worth" name="worth"><br>
+                        <label for="name">Image URL</label><br>
+                            <input type="text" id="imageurl" name="imageurl"><br>
+                    </div>
+                    <div>
+                        <button id="submit">Submit</button>
+                    </div>
+                </form>
+            </div><br><br><br><br>
+            <div>
+            <blockquote>
+                <p style="font-size: 16px;">“The biggest risk is not taking any risk. In a world that’s changing really quickly, the only strategy that is guaranteed to fail is not taking risks.” – Mark Zuckerberg</p>
+            </blockquote>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Fetch data from the server when the page loads
+        window.onload = function() {
+            getAllPeople();
+        };
+
+        // Function to clear input fields
+        function clearInputFields() {
+            document.getElementById('name').value = '';
+            document.getElementById('country').value = '';
+            document.getElementById('industry').value = '';
+            document.getElementById('source').value = '';
+            document.getElementById('worth').value = '';
+            document.getElementById('imageurl').value = '';
+        }
+
+        function getAllPeople () {
+            fetch('http://localhost:3000/top-richest/all')
+                .then(response => response.json())
+                .then(data => {
+                    renderPeople(data);
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        }
+
+        // Function to render people data
+        function renderPeople(people) {
+            const peopleList = document.getElementById('peopleList');
+
+            // Clear existing content
+            peopleList.innerHTML = '';
+
+            // Loop through each person and create HTML elements to display their data
+            people.forEach(person => {
+                const personDiv = document.createElement('div');
+                personDiv.innerHTML = `
+                    <div class="people">
+                        <img src="${person.squareImage}"  alt="${person.personName}" width="150" height="150">
+                        <ul>
+                            <li><strong>Name: </strong>${person.personName}</li>
+                            <li>Country: ${person.countryOfCitizenship}</li>
+                            <li>Industry: ${person.industry}</li>
+                            <li>Source: ${person.source}</li>
+                            <li>Worth: $${person.finalWorth}</li>
+                        </ul>
+                    </div>
+                `;
+                peopleList.appendChild(personDiv);
+            });
+
+            // Display data in console log
+            console.log(people);
+        }
+
+        document.getElementById('submit').addEventListener('click', function(event){
+            event.preventDefault();
+            addPerson();
+        });
+
+        function addPerson() {
+            const personName = document.getElementById('name').value;
+            const countryOfCitizenship = document.getElementById('country').value;
+            const industry = document.getElementById('industry').value;
+            const source = document.getElementById('source').value;
+            const finalWorth = document.getElementById('worth').value;
+            const squareImage = document.getElementById('imageurl').value;
+
+            fetch('http://localhost:3000/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ personName, countryOfCitizenship, industry, source, finalWorth, squareImage}),
+            })
+            .then(response => response.json())
+            .then(data => {
+                getAllPeople();
+                clearInputFields(); // Clear input fields after successfully adding person
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+
+    </script>
+    
+</body>
+</html>
